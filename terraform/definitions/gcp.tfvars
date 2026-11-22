@@ -29,27 +29,27 @@ data_projects = {
     }
   }
 
-  # Analytics & MLOps Platform: Serving, Marts & Model Training
-  "data-analytics" = {
-    description  = "Data modeling, BigQuery analytics marts, and Vertex AI model training"
-    squad_email  = "data-analytics@company.internal"
-    environments = ["dev", "stg", "prd"]
+  #   # Analytics & MLOps Platform: Serving, Marts & Model Training
+  #   "data-analytics" = {
+  #     description  = "Data modeling, BigQuery analytics marts, and Vertex AI model training"
+  #     squad_email  = "data-analytics@company.internal"
+  #     environments = ["dev", "stg", "prd"]
 
-    data_apis = [
-      "bigquery.googleapis.com",
-      "aiplatform.googleapis.com",
-      "run.googleapis.com",
-      "storage.googleapis.com"
-    ]
+  #     data_apis = [
+  #       "bigquery.googleapis.com",
+  #       "aiplatform.googleapis.com",
+  #       "run.googleapis.com",
+  #       "storage.googleapis.com"
+  #     ]
 
-    github_repos = [
-      "dttnc/pi-cloud-governance",
-      "dttnc/data-pipeline"
-    ]
+  #     github_repos = [
+  #       "dttnc/pi-cloud-governance",
+  #       "dttnc/data-pipeline"
+  #     ]
 
-    labels = {
-      domain      = "analytics"
-      cost_center = "data-science"
-    }
-  }
+  #     labels = {
+  #       domain      = "analytics"
+  #       cost_center = "data-science"
+  #     }
+  #   }
 }
