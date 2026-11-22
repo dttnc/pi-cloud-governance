@@ -7,8 +7,4 @@ terraform {
       version = "~> 6.0"
     }
   }
-  backend "gcs" {
-    bucket = "dttnc-pi-cloud-governance-tfstate"
-    prefix = "github"
-  }
 }
