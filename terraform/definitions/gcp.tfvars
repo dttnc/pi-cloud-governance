@@ -1,6 +1,6 @@
 # Declarative GCP Multi-Project Data Factory (dev, stg, prd)
 
-billing_account = "012345-6789AB-CDEF01"
+billing_account = "01D1B6-CAB19C-A45EEF"
 default_region  = "europe-west1"
 github_org      = "dttnc"
 
