@@ -1,0 +1,130 @@
+name: "GitHub Org Governance GitOps"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "terraform/github/**"
+      - "terraform/modules/github_governance/**"
+      - "terraform/definitions/github.tfvars"
+      - ".github/workflows/github-governance.yml"
+
+  push:
+    branches:
+      - "main"
+    paths:
+      - "terraform/github/**"
+      - "terraform/modules/github_governance/**"
+      - "terraform/definitions/github.tfvars"
+      - ".github/workflows/github-governance.yml"
+
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
+
+permissions:
+  contents: read
+  pull-requests: write # Required to comment speculative plan on PR
+
+jobs:
+  terraform-plan:
+    name: "Speculative Terraform Plan"
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Generate Short-Lived App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.0"
+
+      - name: Terraform Init
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: terraform -chdir=terraform/github init
+
+      - name: Terraform Plan
+        id: plan
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          terraform -chdir=terraform/github plan \
+            -var-file=../definitions/github.tfvars \
+            -no-color -out=tfplan 2>&1 | tee plan_output.txt
+
+      - name: Post Plan Comment on Pull Request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let planOutput = fs.readFileSync('plan_output.txt', 'utf8');
+            if (planOutput.length > 60000) {
+              planOutput = planOutput.substring(0, 60000) + "\n...[truncated]";
+            }
+            const body = `### 🤖 GitHub Governance: Speculative Plan
+            #### Status: ✅ Success
+            * **Triggered by:** @${{ github.actor }}
+            * **Target Stack:** \`terraform/github\`
+            * **Definition:** \`terraform/definitions/github.tfvars\`
+            * **Auth Mode:** Ephemeral GitHub App Token (\`dttnc-platform-automation\`)
+
+            <details><summary>Show Terraform Plan Output</summary>
+
+            \`\`\`hcl
+            ${planOutput}
+            \`\`\`
+
+            </details>`;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+
+  # Terraform Apply (Runs ONLY when merged to main or manually dispatched)
+  terraform-apply:
+    name: "Apply GitHub Org Governance"
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Generate Short-Lived App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.AUTOMATION_APP_ID }}
+          private-key: ${{ secrets.AUTOMATION_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.0"
+
+      - name: Terraform Init
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: terraform -chdir=terraform/github init
+
+      - name: Terraform Apply
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          terraform -chdir=terraform/github apply \
+            -var-file=../definitions/github.tfvars \
+            -auto-approve
