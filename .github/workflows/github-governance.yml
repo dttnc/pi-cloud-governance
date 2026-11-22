@@ -8,14 +8,6 @@ on:
       - "terraform/_modules/github_governance/**"
       - "terraform/definitions/github.tfvars"
       - ".github/workflows/github-governance.yml"
-
-  push:
-    branches: [ "main" ]
-    paths:
-      - "terraform/github/**"
-      - "terraform/_modules/github_governance/**"
-      - "terraform/definitions/github.tfvars"
-      - ".github/workflows/github-governance.yml"
   workflow_dispatch:
 
 permissions:
