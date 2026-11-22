@@ -1,4 +1,4 @@
-module "github" {
+module "github_governance" {
   source = "../_modules/github_governance"
 
   teams        = var.github_teams
