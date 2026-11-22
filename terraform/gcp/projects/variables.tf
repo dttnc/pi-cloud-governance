@@ -7,7 +7,7 @@ variable "billing_project_id" {
 variable "billing_account" {
   description = "Google Cloud Billing Account ID."
   type        = string
-  default     = "012345-6789AB-CDEF01"
+  default     = "01D1B6-CAB19C-A45EEF"
 }
 
 variable "folder_id" {
