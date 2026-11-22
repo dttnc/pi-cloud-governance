@@ -1,6 +1,4 @@
-# ==============================================================================
 # Declarative GCP Multi-Project Data Factory (dev, stg, prd)
-# ==============================================================================
 
 billing_account = "012345-6789AB-CDEF01"
 default_region  = "europe-west1"
