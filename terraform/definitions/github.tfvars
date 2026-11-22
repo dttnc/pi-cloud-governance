@@ -18,15 +18,6 @@ github_teams = {
 
 # 2. GitHub Repositories & Squad Permissions as Code
 github_repositories = {
-  "pi-cloud-governance" = {
-    description = "Declarative GitOps repository for GCP projects, IAM, and GitHub governance"
-    visibility  = "public"
-    topics      = ["terraform", "gitops", "gcp-governance", "wif"]
-    team_permissions = {
-      "data-platform"  = "admin"
-      "data-analytics" = "pull"
-    }
-  }
   "data-pipeline" = {
     description = "ETL pipeline and feature transformation service for BigQuery & Vertex AI"
     visibility  = "public"

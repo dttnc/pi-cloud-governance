@@ -1,13 +1,6 @@
 name: "IaC Security & Policy Scan"
 
 on:
-  push:
-    branches:
-      - "**"
-    paths:
-      - "terraform/**"
-      - ".github/workflows/iac-scan.yml"
-
   pull_request:
     branches:
       - "main"
