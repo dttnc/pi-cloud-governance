@@ -1,0 +1,37 @@
+name: "IaC Security & Policy Scan"
+
+on:
+  pull_request:
+    branches:
+      - "main"
+    paths:
+      - "terraform/**"
+      - ".github/workflows/iac-scan.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  iac-scan:
+    name: "Checkov & Formatting Scan"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.0"
+
+      - name: Terraform Format Check
+        run: terraform -chdir=terraform fmt -check -recursive
+
+      - name: Run Checkov Security Scan
+        uses: bridgecrewio/checkov-action@master
+        with:
+          framework: terraform
+          directory: terraform/
+          soft_fail: true # Logs violations without blocking if warnings exist
+          output_format: cli
