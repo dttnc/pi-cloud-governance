@@ -28,16 +28,15 @@ variable "github_org" {
   default     = "dttnc"
 }
 
-variable "data_projects" {
-  description = "Declarative definition of GCP projects."
+variable "projects" {
+  description = "Declarative definition of multi-tenant GCP squad projects across folders."
   type = map(object({
     folder       = string
     description  = string
     squad_email  = string
     environments = list(string)
-    data_apis = optional(list(string), [
-      "bigquery.googleapis.com",
-    ])
+    apis         = optional(list(string), [])
+    sa_roles     = optional(list(string), [])
     github_repos = list(string)
     labels       = optional(map(string), {})
   }))

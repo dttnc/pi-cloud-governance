@@ -9,11 +9,11 @@ output "project_number" {
 }
 
 output "deployer_sa_email" {
-  description = "The email of the data pipeline deployer service account."
-  value       = google_service_account.data_deployer.email
+  description = "The email of the squad deployer service account."
+  value       = google_service_account.deployer.email
 }
 
 output "deployer_sa_id" {
-  description = "The fully qualified ID of the data pipeline deployer service account."
-  value       = google_service_account.data_deployer.id
+  description = "The fully qualified ID of the squad deployer service account."
+  value       = google_service_account.deployer.id
 }

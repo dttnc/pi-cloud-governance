@@ -5,12 +5,12 @@ billing_account = "01D1B6-CAB19C-A45EEF"
 default_region  = "europe-west1"
 github_org      = "dttnc"
 
-# 1. Data Squad Projects (Folder: "data")
-data_projects = {
+# Declarative Projects across Squad Folders
+projects = {
   # Core Data Platform: Ingestion, Lakehouse & Shared Datasets
   "data-platform" = {
     folder      = "data"
-    description = "Core Data Platform lakehouse, ingestion pipelines, and shared BigQuery datasets"
+    description = "Core Data Platform (Ingestion pipelines, shared BigQuery datasets etc)"
     squad_email = "data-platform@company.internal"
     environments = [
       "dev",
@@ -18,10 +18,15 @@ data_projects = {
       # "...",
     ]
 
-    data_apis = [
+    apis = [
       "bigquery.googleapis.com",
       #   "...."
       #   "...."
+    ]
+
+    sa_roles = [
+      "roles/bigquery.dataEditor",
+      "roles/bigquery.jobUser",
     ]
 
     github_repos = [
@@ -43,7 +48,6 @@ data_projects = {
 
   #     data_apis = [
   #       "bigquery.googleapis.com",
-  #       "aiplatform.googleapis.com",
   #     ]
 
   #     github_repos = [
