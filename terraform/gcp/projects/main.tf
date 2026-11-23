@@ -5,7 +5,7 @@ locals {
     if !can(regex("^[0-9]+$", v.folder)) && !startswith(v.folder, "folders/")
   ])
 
-  # Flatten projects across declared environments (e.g. data-platform-dev, data-platform-stg, data-platform-prd)
+  # Flatten projects across declared environments (e.g. dttnc-data-platform-dev, dttnc-data-platform-stg, dttnc-data-platform-prd)
   project_env_matrix = merge([
     for proj_key, proj in var.projects : {
       for env in proj.environments : "${proj_key}-${env}" => {
