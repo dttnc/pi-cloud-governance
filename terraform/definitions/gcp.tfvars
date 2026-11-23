@@ -9,10 +9,14 @@ github_org      = "dttnc"
 data_projects = {
   # Core Data Platform: Ingestion, Lakehouse & Shared Datasets
   "data-platform" = {
-    folder       = "data"
-    description  = "Core Data Platform lakehouse, ingestion pipelines, and shared BigQuery datasets"
-    squad_email  = "data-platform@company.internal"
-    environments = ["dev", "stg", "prd"]
+    folder      = "data"
+    description = "Core Data Platform lakehouse, ingestion pipelines, and shared BigQuery datasets"
+    squad_email = "data-platform@company.internal"
+    environments = [
+      "dev",
+      # "stg",
+      #  "prd"
+    ]
 
     data_apis = [
       "bigquery.googleapis.com",

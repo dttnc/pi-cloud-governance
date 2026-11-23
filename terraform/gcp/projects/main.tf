@@ -10,7 +10,7 @@ locals {
   # Flatten projects across declared environments (e.g. data-platform_dev, data-platform_stg, data-platform_prd)
   project_env_matrix = merge([
     for proj_key, proj in local.all_projects : {
-      for env in proj.environments : "${proj_key}_${env}" => {
+      for env in proj.environments : "${proj_key}-${env}" => {
         base_name    = proj_key
         description  = proj.description
         environment  = env
