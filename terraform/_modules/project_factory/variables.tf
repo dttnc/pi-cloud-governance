@@ -1,5 +1,5 @@
 variable "project_base_name" {
-  description = "Base name of the data project without environment suffix (e.g., data-analytics)."
+  description = "Base name of the project without environment suffix (e.g., data-platform, mobile-backend)."
   type        = string
 }
 
@@ -9,9 +9,8 @@ variable "environment" {
 }
 
 variable "folder_id" {
-  description = "Parent GCP Folder ID (optional)."
+  description = "Parent GCP Folder ID (e.g. folders/123456789 or numeric ID)."
   type        = string
-  default     = ""
 }
 
 variable "billing_account" {
@@ -19,16 +18,16 @@ variable "billing_account" {
   type        = string
 }
 
-variable "data_apis" {
-  description = "List of GCP Data & AI APIs to enable."
+variable "apis" {
+  description = "List of GCP APIs to enable for this squad's project."
   type        = list(string)
-  default = [
-    "bigquery.googleapis.com",
-    "aiplatform.googleapis.com",
-    "storage.googleapis.com",
-    "run.googleapis.com",
-    "artifactregistry.googleapis.com"
-  ]
+  default     = []
+}
+
+variable "sa_roles" {
+  description = "List of IAM roles granted to the squad deployer Service Account in this project."
+  type        = list(string)
+  default     = []
 }
 
 variable "labels" {
@@ -38,7 +37,7 @@ variable "labels" {
 }
 
 variable "squad_email" {
-  description = "Google Group email of the data squad owning this project."
+  description = "Google Group email of the squad owning this project."
   type        = string
 }
 

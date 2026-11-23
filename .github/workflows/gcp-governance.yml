@@ -6,16 +6,17 @@ on:
     paths:
       - "terraform/gcp/**"
       - "terraform/definitions/gcp.tfvars"
-      - "terraform/_modules/data_project_factory/**"
+      - "terraform/_modules/project_factory/**"
       - "terraform/_modules/workload_identity/**"
       - ".github/workflows/gcp-governance.yml"
   push:
     branches: [ "main" ]
     paths:
-      - "terraform/github/**"
-      - "terraform/modules/github_governance/**"
-      - "terraform/definitions/github.tfvars"
-      - ".github/workflows/github-governance.yml"
+      - "terraform/gcp/**"
+      - "terraform/definitions/gcp.tfvars"
+      - "terraform/_modules/project_factory/**"
+      - "terraform/_modules/workload_identity/**"
+      - ".github/workflows/gcp-governance.yml"
   workflow_dispatch:
 
 permissions:

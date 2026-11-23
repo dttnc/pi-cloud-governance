@@ -1,21 +1,32 @@
-# Declarative GCP Multi-Project Data Factory (dev, stg, prd)
+# Declarative GCP Multi-Project Factory
 
+org_id          = "149483480559"
 billing_account = "01D1B6-CAB19C-A45EEF"
 default_region  = "europe-west1"
 github_org      = "dttnc"
 
-data_projects = {
+# Declarative Projects across Squad Folders
+projects = {
   # Core Data Platform: Ingestion, Lakehouse & Shared Datasets
   "data-platform" = {
-    description  = "Core Data Platform lakehouse, ingestion pipelines, and shared BigQuery datasets"
-    squad_email  = "data-platform@company.internal"
-    environments = ["dev", "stg", "prd"]
+    folder      = "data"
+    description = "Core Data Platform (Ingestion pipelines, shared BigQuery datasets etc)"
+    squad_email = "data-platform@company.internal"
+    environments = [
+      "dev",
+      #  "stg"
+      # "...",
+    ]
 
-    data_apis = [
+    apis = [
       "bigquery.googleapis.com",
-      "storage.googleapis.com",
-      "run.googleapis.com",
-      "artifactregistry.googleapis.com"
+      #   "...."
+      #   "...."
+    ]
+
+    sa_roles = [
+      "roles/bigquery.dataEditor",
+      "roles/bigquery.jobUser",
     ]
 
     github_repos = [
@@ -37,9 +48,6 @@ data_projects = {
 
   #     data_apis = [
   #       "bigquery.googleapis.com",
-  #       "aiplatform.googleapis.com",
-  #       "run.googleapis.com",
-  #       "storage.googleapis.com"
   #     ]
 
   #     github_repos = [
