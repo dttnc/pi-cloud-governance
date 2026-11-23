@@ -23,10 +23,6 @@ variable "data_apis" {
   type        = list(string)
   default = [
     "bigquery.googleapis.com",
-    "aiplatform.googleapis.com",
-    "storage.googleapis.com",
-    "run.googleapis.com",
-    "artifactregistry.googleapis.com"
   ]
 }
 

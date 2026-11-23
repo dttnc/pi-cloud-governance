@@ -37,8 +37,6 @@ variable "data_projects" {
     environments = list(string)
     data_apis = optional(list(string), [
       "bigquery.googleapis.com",
-      "aiplatform.googleapis.com",
-      "storage.googleapis.com"
     ])
     github_repos = list(string)
     labels       = optional(map(string), {})

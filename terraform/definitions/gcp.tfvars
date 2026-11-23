@@ -44,8 +44,6 @@ data_projects = {
   #     data_apis = [
   #       "bigquery.googleapis.com",
   #       "aiplatform.googleapis.com",
-  #       "run.googleapis.com",
-  #       "storage.googleapis.com"
   #     ]
 
   #     github_repos = [

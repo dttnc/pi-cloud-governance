@@ -1,9 +1,5 @@
-resource "random_id" "suffix" {
-  byte_length = 3
-}
-
 locals {
-  project_id = "${var.project_base_name}-${var.environment}-${random_id.suffix.hex}"
+  project_id = "${var.project_base_name}-${var.environment}"
 
   # Core infrastructure & telemetry APIs
   infra_apis = [
@@ -57,20 +53,9 @@ resource "google_project_iam_member" "data_roles" {
   for_each = toset([
     "roles/bigquery.dataEditor",
     "roles/bigquery.jobUser",
-    "roles/storage.objectAdmin",
-    "roles/aiplatform.user",
-    "roles/run.developer",
-    "roles/viewer"
   ])
 
   project = google_project.project.project_id
   role    = each.key
   member  = "serviceAccount:${google_service_account.data_deployer.email}"
-}
-
-# 5. Human Squad Member Access (Reader on prd, Editor on dev)
-resource "google_project_iam_member" "squad_access" {
-  project = google_project.project.project_id
-  role    = var.environment == "prd" ? "roles/viewer" : "roles/editor"
-  member  = "group:${var.squad_email}"
 }
