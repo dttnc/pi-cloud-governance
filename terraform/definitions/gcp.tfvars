@@ -14,15 +14,14 @@ data_projects = {
     squad_email = "data-platform@company.internal"
     environments = [
       "dev",
-      # "stg",
-      #  "prd"
+      #  "stg"
+      # "...",
     ]
 
     data_apis = [
       "bigquery.googleapis.com",
-      "storage.googleapis.com",
-      "run.googleapis.com",
-      "artifactregistry.googleapis.com"
+      #   "...."
+      #   "...."
     ]
 
     github_repos = [
