@@ -8,7 +8,7 @@ github_org      = "dttnc"
 # Declarative Projects across Squad Folders
 projects = {
   # Core Data Platform: Ingestion, Lakehouse & Shared Datasets
-  "data-platform" = {
+  "dttnc-data-platform" = {
     folder      = "data"
     description = "Core Data Platform (Ingestion pipelines, shared BigQuery datasets etc)"
     squad_email = "data-platform@company.internal"
