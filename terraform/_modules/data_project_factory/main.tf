@@ -27,7 +27,7 @@ locals {
 resource "google_project" "project" {
   name            = "${var.project_base_name}-${var.environment}"
   project_id      = local.project_id
-  folder_id       = var.folder_id != "" ? var.folder_id : null
+  folder_id       = var.folder_id
   billing_account = var.billing_account
   labels          = local.standard_labels
 

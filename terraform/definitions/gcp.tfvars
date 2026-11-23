@@ -1,12 +1,15 @@
-# Declarative GCP Multi-Project Data Factory (dev, stg, prd)
+# Declarative GCP Multi-Project Factory
 
+org_id          = "149483480559"
 billing_account = "01D1B6-CAB19C-A45EEF"
 default_region  = "europe-west1"
 github_org      = "dttnc"
 
+# 1. Data Squad Projects (Folder: "data")
 data_projects = {
   # Core Data Platform: Ingestion, Lakehouse & Shared Datasets
   "data-platform" = {
+    folder       = "data"
     description  = "Core Data Platform lakehouse, ingestion pipelines, and shared BigQuery datasets"
     squad_email  = "data-platform@company.internal"
     environments = ["dev", "stg", "prd"]

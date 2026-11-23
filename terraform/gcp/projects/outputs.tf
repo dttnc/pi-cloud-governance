@@ -1,3 +1,14 @@
+output "folders" {
+  description = "Created squad folders under the organization."
+  value = {
+    for k, v in google_folder.folders : k => {
+      id           = v.folder_id
+      name         = v.name
+      display_name = v.display_name
+    }
+  }
+}
+
 output "data_projects" {
   description = "Provisioned GCP Data Projects and Deployer Service Accounts across dev, stg, prd."
   value = {

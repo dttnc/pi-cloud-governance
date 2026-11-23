@@ -9,9 +9,8 @@ variable "environment" {
 }
 
 variable "folder_id" {
-  description = "Parent GCP Folder ID (optional)."
+  description = "Parent GCP Folder ID (e.g. folders/123456789 or numeric ID)."
   type        = string
-  default     = ""
 }
 
 variable "billing_account" {

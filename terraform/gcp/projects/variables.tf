@@ -10,10 +10,10 @@ variable "billing_account" {
   default     = "01D1B6-CAB19C-A45EEF"
 }
 
-variable "folder_id" {
-  description = "Parent GCP Folder ID (optional)."
+variable "org_id" {
+  description = "Google Cloud Organization ID."
   type        = string
-  default     = ""
+  default     = "149483480559"
 }
 
 variable "default_region" {
@@ -29,8 +29,9 @@ variable "github_org" {
 }
 
 variable "data_projects" {
-  description = "Declarative definition of GCP Data & Analytics projects."
+  description = "Declarative definition of GCP projects."
   type = map(object({
+    folder       = string
     description  = string
     squad_email  = string
     environments = list(string)
